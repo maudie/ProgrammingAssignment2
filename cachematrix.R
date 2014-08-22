@@ -7,31 +7,28 @@
 
 makeCacheMatrix <- function(x = matrix()) {
 	
-		## i will store the computed inverse of the matrix
-		## initialized to NULL prior to computation
+		## 'i' will store the computed inverse of the matrix
+		## initialize it to NULL
 		i <- NULL
 
-		## When set is called on the matrix, the value of
-		## y is assigned to the matrix, and any previously
-		## computed inverse is discarded by resetting i
-		## to NULL
+		## set() stores a new matrix value in 'x' and resets
+		## the computed inverse to NULL
 		set <- function(y) {
 				x <<- y
 				i <<- NULL
 		}
 	
-		## Returns the value of the matrix
+		## get() returns the value of the matrix
 		get <- function() x
 		
-		## Given the computed inverse of the matrix
-		## setinverse stores the value in i
+		## setinverse() caches a new inverse value in 'i'
 		setinverse <- function(inverse) i <<- inverse
 		
-		## Returns the value of the matrix inverse
+		## getinverse() returns the value of the inverse
 		getinverse <- function() i
 		
-		## Return a list object with tagged arguments
-		## that will allow the matrix object's
+		## makeCachMatrix() returns a list object
+		## whose tagged arguments allow the matrix object's
 		## get, set, getinverse, and setinverse
 		## functions to be called
 		list(get = get, set = set,
@@ -41,11 +38,8 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## cacheSolve() calculates the inverse of the matrix stored
+## cacheSolve() returns the inverse of the matrix stored
 ## in the object returned by makeCacheMatrix()
-## If the inverse has been computed previously, cacheSolve()
-## will return the cached value. Otherwise cacheSolve()
-## will compute the inverse, cache it, and return it
 
 cacheSolve <- function(x, ...) {
 		
@@ -58,8 +52,8 @@ cacheSolve <- function(x, ...) {
 				return(i)
 		}
 		
-		## If the inverse hasn't been cached, then compute it,
-		## store it, and return it
+		## If the inverse hasn't been cached, we then compute it,
+		## cache it, and return it
 		
 		## First, get the matrix that needs to be solved out of
 		## the special matrix object
